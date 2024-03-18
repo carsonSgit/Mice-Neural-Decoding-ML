@@ -1,0 +1,22 @@
+name: Convert README to HTML
+
+on:
+  push:
+    branches:
+      - main  # adjust the branch name as needed
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Pandoc
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc
+
+    - name: Convert README.md to HTML
+      run: pandoc README.md -o README.html
