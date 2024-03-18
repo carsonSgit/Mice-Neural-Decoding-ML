@@ -18,11 +18,12 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Install markdown-to-html
-      run: npm install -g markdown-to-html
+    - name: Install dependencies
+      run: npm install markdown-it
 
     - name: Convert README.md to HTML
-      run: markdown-to-html README.md > README.html
+      run: |
+        node -e "const fs = require('fs'); const md = require('markdown-it')(); fs.writeFileSync('README.html', md.render(fs.readFileSync('README.md', 'utf8')));"
 
     - name: Commit and push changes
       run: |
