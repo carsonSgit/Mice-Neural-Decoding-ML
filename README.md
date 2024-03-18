@@ -9,6 +9,15 @@
 -  **[Seungyeon Lee](https://www.linkedin.com/in/seungyeon-lee/)** BS, Neuroscience, Minor in Computer Science @ McGill 🧠
 -  **[Amélie Beaudin](https://www.linkedin.com/in/am%C3%A9lie-beaudin-60241b248/)** BS, Computer Science @ McGill 💻
 
+## ⭐ PharmaHacks
+
+[PharmaHacks](https://www.linkedin.com/company/pharmahacks/) is a hackathon organized by students of McGill University. PharmaHacks' mission is to "provide interested students with bioinformatics/cheminformatics training through extracurricular means to prepare them for future jobs in industry, academia, and government."[^1]
+PharmaHacks (formerly StudentPharma) is a student-led non-profit organization created by McGill University undergraduates. 
+
+We want to thank the organizers for putting together such an amazing event, we look forward to future events!
+
+[^1]: [PharmaHacks' LinkedIn](https://www.linkedin.com/company/pharmahacks/)
+
 ## :label: Problem Description
 
 **Neuroscientist & Dr. [Shih-Yi Tseng](https://www.linkedin.com/in/shih-yi-tseng/) et al.** published a [Neuron paper](https://www.cell.com/neuron/fulltext/S0896-6273(22)00453-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0896627322004536%3Fshowall%3Dtrue) documenting their experiments performed on 8 mice. The experiment captures over 200,000 neurons over 6 areas of the mices' posterior cortices; L2/3 and L5, V1, secondary visual areas, Retrosplenial Cortex (RSC), and the Posterior Parietal Cortext (PPC).
@@ -32,4 +41,4 @@
 
 Thanks to their experiment, we are able to access the mices' neural data and analyze what neuron activation corresponds to navigation decision making. 
 
-From the [data provided](https://dandiarchive.org/dandiset/000579) by the researchers, we were tasked with creating a Machine Learning model that would be able to predict a mouse's position in the maze.
+From the [data provided](https://dandiarchive.org/dandiset/000579) by the researchers, we were tasked with creating a Machine Learning model that would be able to predict a mouse's position in the maze. We were allowed to work from 9:00AM March 16 to 1:30PM March 17.
