@@ -57,7 +57,7 @@ From the [data provided](https://dandiarchive.org/dandiset/000579) by the resear
 
 Our first mission was to understand the data. after thorough research & analysis of the neural paper & use tutorial of the data, we narrowed down our focus to these specific factors:
 - **The RSC:** We chose to isolate our focus on the RSC due to it's functions encompassing navigation and spacial memory. 
-- **The L2/3 neurons:** Our data presented us with the L2/3 layers & the L5 in separate files. We decided on working with the L2/3 due to it's relations in processing sensory information. 
+- **The L2/3 neurons:** Our data presented us with the L2/3 layers & the L5 in separate files. We decided on working with the L2/3 due to its relations in processing sensory information. 
 - **Multi-plane images:** Having been given the option between Single-Plane & Multi-Plane imaging, we chose to go with Multi-Plane so that we had more comprehensive data to work with. 
 
 
