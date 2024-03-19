@@ -66,13 +66,13 @@ Our first mission was to understand the data. after thorough research & analysis
 The data has 4 deconvoluted planes, each of which are desynchronized from one another & have many NaN (missing) values. Below was our process to resolve these issues;
 
 - **Unsynchronized data:** 
-    - [x] Join all **4 deconvoluted planes** together. 
-    - [x] Format the columns to accurately reference to the Timestamp data (Timestamp of neuron activity capture). 
-    - [ ] 
+    - Join all **4 deconvoluted planes** together. 
+    - Format the columns to accurately reference to the Timestamp data (Timestamp of neuron activity capture). 
+    - TO BE CONTINUED.....
 
 - **NaN values:** Two methods of resolution
-    - [x] Dropped all NaNs and saved in a new set. 
-    - [x] Utilized an IterativeImputer model to impute what the missing data should be according to it's surrounding data values. 
+    - Dropped all NaNs and saved in a new set. 
+    - Utilized an IterativeImputer model to impute what the missing data should be according to it's surrounding data values. 
 
 #### Machine Learning Model
 
@@ -82,5 +82,5 @@ Once it came down to choosing a model, we had to research different categories o
 >> To explain this, first we have to look at what a **DecisionTreeRegressor** is. 
 >> A DecisionTreeRegressor is a model that recursively splits the training data into partitions. 
 >> These splits allow for the model to choose which data best fits the training data & predicts off of the most accurate splits (leafs). 
-> So what *is* a **RandomForestRegressor**?
-> A RandomForestRegressor creates & trains multiple *DecisionTreeRegressors* on subsets of the data. It then chooses the DecisionTreeRegressors with the lowest error indicators & averages them together to create the most accurate possible version. 
+>>> So what *is* a **RandomForestRegressor**?
+>>> A RandomForestRegressor creates & trains multiple *DecisionTreeRegressors* on subsets of the data. It then chooses the DecisionTreeRegressors with the lowest error indicators & averages them together to create the most accurate possible version. 
