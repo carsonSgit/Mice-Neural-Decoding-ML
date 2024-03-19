@@ -2,7 +2,7 @@
 
 
 ## 🏬 Our Team 
-
+> Hyperlinks lead to LinkedIn profiles*
 -  **[Marcus Lee](https://www.linkedin.com/in/marcus-lee-3b5298264/)** DEC, Computer Science & Math @ Vanier College 💻
 -  **[Carson Spriggs-Audet](https://www.linkedin.com/in/carson-spriggs-audet-609372217/)** DEC, Computer Science @ John Abbott College 💻
 -  **[Jiwon Kim](https://www.linkedin.com/in/jiwon-kim-32b39a261/)** BS, Life Science | Brain & Cognivitive Science @ Korea University 🧠
