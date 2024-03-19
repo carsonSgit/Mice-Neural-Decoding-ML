@@ -1,6 +1,6 @@
 # Neural Decoding - PharmaHacks2024
 
-Welcome to our teams' repository for McGill's PharmaHacks Neural Decoding challenge! If you are interested in viewing our code, you can click [here]('./PharmaHacks 2024 Neural Decoding Single File.ipynb')
+Welcome to our teams' repository for McGill's PharmaHacks Neural Decoding challenge! If you are interested in viewing our code, you can click [here](./PharmaHacks%202024%20Neural%20Decoding%20Single%20File.ipynb)
 
 ## 🏬 Our Team 
 > Hyperlinks lead to LinkedIn profiles*
