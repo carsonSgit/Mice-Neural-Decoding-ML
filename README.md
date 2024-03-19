@@ -14,7 +14,7 @@ Welcome to our teams' repository for McGill's PharmaHacks Neural Decoding challe
 
 [PharmaHacks](https://www.linkedin.com/company/pharmahacks/) is a hackathon organized by students of McGill University. PharmaHacks' mission is to "provide interested students with bioinformatics/cheminformatics training through extracurricular means to prepare them for future jobs in industry, academia, and government."[^1]
 
-We want to thank the organizers for putting together such an amazing event, we look forward to future events!
+We want to thank the [organizers](https://pharmahacks.com/Team) for putting together such an amazing event, we look forward to future events!
 
 >[!NOTE]
 >PharmaHacks 2024 had two challenges;
