@@ -49,3 +49,38 @@ We want to thank the [organizers](https://pharmahacks.com/Team) for putting toge
 Thanks to their experiment, we are able to access the mices' neural data and analyze what neuron activation corresponds to navigation decision making. 
 
 From the [data provided](https://dandiarchive.org/dandiset/000579) by the researchers, we were tasked with creating a Machine Learning model that would be able to predict a mouse's position in the maze.
+
+
+## Problem Approach
+
+#### Analysis 
+
+Our first mission was to understand the data. after thorough research & analysis of the neural paper & use tutorial of the data, we narrowed down our focus to these specific factors:
+- **The RSC:** We chose to isolate our focus on the RSC due to it's functions encompassing navigation and spacial memory. 
+- **The L2/3 neurons:** Our data presented us with the L2/3 layers & the L5 in separate files. We decided on working with the L2/3 due to it's relations in processing sensory information. 
+- **Multi-plane images:** Having been given the option between Single-Plane & Multi-Plane imaging, we chose to go with Multi-Plane so that we had more comprehensive data to work with. 
+
+
+#### Data processing
+
+The data has 4 deconvoluted planes, each of which are desynchronized from one another & have many NaN (missing) values. Below was our process to resolve these issues;
+
+- **Unsynchronized data:** 
+    - [x] Join all **4 deconvoluted planes** together. 
+    - [x] Format the columns to accurately reference to the Timestamp data (Timestamp of neuron activity capture). 
+    - [ ] 
+
+- **NaN values:** Two methods of resolution
+    - [x] Dropped all NaNs and saved in a new set. 
+    - [x] Utilized an IterativeImputer model to impute what the missing data should be according to it's surrounding data values. 
+
+#### Machine Learning Model
+
+Once it came down to choosing a model, we had to research different categories of models. Through our prior analysis, we knew we wanted to use something of the classification/regression sort which led us to using a **RandomForestRegressor**. 
+
+> What is a **RandomForestRegressor**?
+>> To explain this, first we have to look at what a **DecisionTreeRegressor** is. 
+>> A DecisionTreeRegressor is a model that recursively splits the training data into partitions. 
+>> These splits allow for the model to choose which data best fits the training data & predicts off of the most accurate splits (leafs). 
+> So what *is* a **RandomForestRegressor**?
+> A RandomForestRegressor creates & trains multiple *DecisionTreeRegressors* on subsets of the data. It then chooses the DecisionTreeRegressors with the lowest error indicators & averages them together to create the most accurate possible version. 
