@@ -3,6 +3,9 @@ import numpy as np
 from pynwb import NWBHDF5IO
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+from sklearn.ensemble import RandomForestRegressor
 
 # Load the NWB file
 io = NWBHDF5IO('data/sub-3_ses-mouse-3-session-date-2017-05-04-area-RSC-L23-multi-plane-imaging_behavior+ophys.nwb', 'r')
@@ -75,5 +78,48 @@ imputed_data = imputer.fit_transform(numerical_data)
 final_df_imputed = pd.DataFrame(imputed_data, columns=final_df.columns, index=final_df.index)
 
 print('Data Imputation Results using IterativeImputer')
+print('IterativeImputer: max_iter=10, random_state=0')
 print('-' * 50)
 print(final_df_imputed.head())
+
+print('Training the model and comparing the results')
+print('Model used: RandomForestRegressor')
+print('Target variables: Forward Position, Lateral Position')
+print('Features: All other columns')
+print('Test size: 0.2')
+print('Random state: 0')
+print('Shuffle: False')
+print('MSE: Mean Squared Error')
+print('Model 1: Dropped NaNs')
+print('Model 2: Imputed data')
+print('-' * 50)
+
+# Separate our target variables (y) and features (X)
+y = final_df.dropna()[['Forward Position', 'Lateral Position']]
+X = final_df.dropna().drop(['Forward Position', 'Lateral Position'], axis=1)
+
+# Initialize the RandomForestRegressor
+model = RandomForestRegressor(random_state=0)
+
+# Splitting the dataset with dropped NaNs
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0, shuffle=False)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+print('-' * 50)
+print(f"MSE for model with dropped NaNs: {mse}")
+
+# Separate our target variables (y) and features (X)
+y_imputed = final_df_imputed[['Forward Position', 'Lateral Position']]
+X_imputed = final_df_imputed.drop(['Forward Position', 'Lateral Position'], axis=1)
+
+# Initialize the RandomForestRegressor
+imputed_model = RandomForestRegressor(random_state=0)
+
+# Splitting the imputed dataset
+X_train_imputed, X_test_imputed, y_train_imputed, y_test_imputed = train_test_split(X_imputed, y_imputed, test_size=0.2, random_state=0, shuffle=False)
+imputed_model.fit(X_train_imputed, y_train_imputed)
+y_pred_imputed = imputed_model.predict(X_test_imputed)
+mse_imputed = mean_squared_error(y_test_imputed, y_pred_imputed)
+print('-' * 50)
+print(f"MSE for model with imputed data: {mse_imputed}")
