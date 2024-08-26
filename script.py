@@ -6,6 +6,8 @@ from sklearn.impute import IterativeImputer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.ensemble import RandomForestRegressor
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load the NWB file
 io = NWBHDF5IO('data/sub-3_ses-mouse-3-session-date-2017-05-04-area-RSC-L23-multi-plane-imaging_behavior+ophys.nwb', 'r')
@@ -123,3 +125,36 @@ y_pred_imputed = imputed_model.predict(X_test_imputed)
 mse_imputed = mean_squared_error(y_test_imputed, y_pred_imputed)
 print('-' * 50)
 print(f"MSE for model with imputed data: {mse_imputed}")
+
+# Set the style of the plots
+plt.rcParams['text.color'] = 'gray'
+plt.rcParams['axes.labelcolor'] = 'gray'
+plt.rcParams['xtick.color'] = 'gray'
+plt.rcParams['ytick.color'] = 'gray'
+
+# Init first timestamps to X_test
+timestamps = X_test.index
+
+# Prepare the actual data for plotting
+actual_data = y_test.copy()
+actual_data['Timestamp'] = timestamps
+
+# Prepare the predicted data for plotting
+predicted_data = pd.DataFrame(y_pred, columns=['Predicted Forward Position', 'Predicted Lateral Position'])
+predicted_data['Timestamp'] = timestamps
+
+# Merging the actual and predicted data for easier plotting
+merged_data = pd.merge(actual_data, predicted_data, on='Timestamp')
+
+# Predicted data from the model trained on the dataset with dropped NaNs
+predicted_dropped_nan = pd.DataFrame(model.predict(X_test), columns=['Predicted Forward Position', 'Predicted Lateral Position'])
+predicted_dropped_nan['Timestamp'] = timestamps
+
+# Predicted data from the model trained on the imputed dataset
+timestamps_imputed = X_test_imputed.index
+predicted_imputed = pd.DataFrame(imputed_model.predict(X_test_imputed), columns=['Predicted Forward Position (Imputed)', 'Predicted Lateral Position (Imputed)'])
+predicted_imputed['Timestamp'] = timestamps_imputed
+
+# Merging the actual and predicted data for easier plotting
+merged_data_dropped_nan = pd.merge(actual_data, predicted_dropped_nan, on='Timestamp')
+merged_data_imputed = pd.merge(actual_data, predicted_imputed, on='Timestamp')
