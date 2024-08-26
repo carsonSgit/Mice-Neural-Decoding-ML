@@ -158,3 +158,61 @@ predicted_imputed['Timestamp'] = timestamps_imputed
 # Merging the actual and predicted data for easier plotting
 merged_data_dropped_nan = pd.merge(actual_data, predicted_dropped_nan, on='Timestamp')
 merged_data_imputed = pd.merge(actual_data, predicted_imputed, on='Timestamp')
+
+# Define the time range for the zoomed-in view
+zoom_start = timestamps[int(len(timestamps) * 0.75)]
+zoom_end = timestamps[int(len(timestamps) * 0.95)]
+
+# Plot for Forward Position
+fig, axs = plt.subplots(2, 1, figsize=(15, 12))
+
+sns.lineplot(ax=axs[0], data=merged_data_dropped_nan, x='Timestamp', y='Forward Position', label='Actual Forward Position')
+sns.lineplot(ax=axs[0], data=merged_data_dropped_nan, x='Timestamp', y='Predicted Forward Position', label='Predicted (Dropped NaNs)')
+sns.lineplot(ax=axs[0], data=merged_data_imputed, x='Timestamp', y='Predicted Forward Position (Imputed)', label='Predicted (Imputed)')
+axs[0].set_title('Actual vs Predicted Forward Position Over Time')
+axs[0].set_xlabel('Time')
+axs[0].set_ylabel('Forward Position')
+axs[0].legend()
+
+# Zoomed-in plot for Forward Position
+sns.lineplot(ax=axs[1], data=merged_data_dropped_nan, x='Timestamp', y='Forward Position', label='Actual Forward Position')
+sns.lineplot(ax=axs[1], data=merged_data_dropped_nan, x='Timestamp', y='Predicted Forward Position', label='Predicted (Dropped NaNs)')
+sns.lineplot(ax=axs[1], data=merged_data_imputed, x='Timestamp', y='Predicted Forward Position (Imputed)', label='Predicted (Imputed)')
+axs[1].set_xlim(zoom_start, zoom_end)
+axs[1].set_title('Zoomed-In View: Forward Position')
+axs[1].set_xlabel('Time')
+axs[1].set_ylabel('Forward Position')
+axs[1].legend()
+
+plt.tight_layout()
+plt.show()
+
+# Plot for Lateral Position
+fig, axs = plt.subplots(2, 1, figsize=(15, 12))
+
+# Full plot for Lateral Position
+sns.lineplot(ax=axs[0], data=merged_data_dropped_nan, x='Timestamp', y='Lateral Position', label='Actual Lateral Position')
+sns.lineplot(ax=axs[0], data=merged_data_dropped_nan, x='Timestamp', y='Predicted Lateral Position', label='Predicted (Dropped NaNs)')
+sns.lineplot(ax=axs[0], data=merged_data_imputed, x='Timestamp', y='Predicted Lateral Position (Imputed)', label='Predicted (Imputed)')
+axs[0].set_title('Actual vs Predicted Lateral Position Over Time')
+axs[0].set_xlabel('Time')
+axs[0].set_ylabel('Lateral Position')
+axs[0].legend()
+
+# Zoomed-in plot for Lateral Position
+sns.lineplot(ax=axs[1], data=merged_data_dropped_nan, x='Timestamp', y='Lateral Position', label='Actual Lateral Position')
+sns.lineplot(ax=axs[1], data=merged_data_dropped_nan, x='Timestamp', y='Predicted Lateral Position', label='Predicted (Dropped NaNs)')
+sns.lineplot(ax=axs[1], data=merged_data_imputed, x='Timestamp', y='Predicted Lateral Position (Imputed)', label='Predicted (Imputed)')
+axs[1].set_xlim(zoom_start, zoom_end)
+axs[1].set_title('Zoomed-In View: Lateral Position')
+axs[1].set_xlabel('Time')
+axs[1].set_ylabel('Lateral Position')
+axs[1].legend()
+
+plt.tight_layout()
+plt.show()
+
+# Close the NWB file
+io.close()
+
+
