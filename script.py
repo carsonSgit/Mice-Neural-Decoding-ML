@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
-
 from pynwb import NWBHDF5IO
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
 
 # Load the NWB file
 io = NWBHDF5IO('data/sub-3_ses-mouse-3-session-date-2017-05-04-area-RSC-L23-multi-plane-imaging_behavior+ophys.nwb', 'r')
@@ -57,4 +58,22 @@ grouped_df = main_df.groupby(np.arange(len(main_df)) // 5)
 final_df = grouped_df.agg('mean')
 final_df.index = grouped_df.apply(lambda x: x.index[0])
 
-final_df.head()
+print('Data Synchronization Results')
+print('-' * 50)
+print(final_df.head())
+
+# Initialize the imputer
+imputer = IterativeImputer(max_iter=10, random_state=0)
+
+# Since IterativeImputer works only with num arrays, we need to convert our DataFrame
+numerical_data = final_df.to_numpy()
+
+# Run the imputer on the data to clear NaN values
+imputed_data = imputer.fit_transform(numerical_data)
+
+# Convert the imputed data back into a DataFrame
+final_df_imputed = pd.DataFrame(imputed_data, columns=final_df.columns, index=final_df.index)
+
+print('Data Imputation Results using IterativeImputer')
+print('-' * 50)
+print(final_df_imputed.head())
