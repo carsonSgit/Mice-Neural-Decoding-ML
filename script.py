@@ -37,3 +37,24 @@ activity_planes = [deconvolved_activity_plane_0_data, deconvolved_activity_plane
                    deconvolved_activity_plane_2_data, deconvolved_activity_plane_3_data]
 activity_timestamps = [deconvolved_activity_plane_0_timestamps, deconvolved_activity_plane_1_timestamps, 
                        deconvolved_activity_plane_2_timestamps, deconvolved_activity_plane_3_timestamps]
+
+activity_dfs = []
+for i, (activity_data, timestamps) in enumerate(zip(activity_planes, activity_timestamps)):
+    df = pd.DataFrame(activity_data)
+    df['Timestamp'] = timestamps
+    df = df.set_index('Timestamp')
+    df = rename_columns(df, f'plane_{i}')
+    activity_dfs.append(df)
+
+# Synchronize and join DataFrames at each DataFrame's last point
+main_df = position_df.join(activity_dfs, how='outer')
+
+# Group the DataFrame into chunks of five and take the first timestamp of each chunk
+    # Each plane is captured with an offset TimeStamp
+grouped_df = main_df.groupby(np.arange(len(main_df)) // 5)
+
+# Aggregate the data within each chunk and use the first timestamp as the index
+final_df = grouped_df.agg('mean')
+final_df.index = grouped_df.apply(lambda x: x.index[0])
+
+final_df.head()
