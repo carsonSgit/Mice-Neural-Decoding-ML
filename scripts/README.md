@@ -1,4 +1,6 @@
-# PLEASE READ
+
+
+## NOTICE
 
 It's important to know that I have not properly tested this format (*.py scripts). This project was made during PharmaHacks2024, and to do so collaboratively, we used a Jupyter Notebook! There is a slight issue being that we did our development in a *Datalore* Jupyter Notebook rather than using a *Google Colab* one.
 
