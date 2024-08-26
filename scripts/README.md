@@ -1,4 +1,8 @@
+# How to run
 
+1. Create a Python `env`.
+2. `pip install` the `requirements.txt`.
+3. Run `python main.py`.
 
 ## NOTICE
 
