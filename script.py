@@ -9,3 +9,31 @@ nwb = io.read()
 
 print(nwb.identifier)
 
+# Lookup data
+forward_and_lateral_position_data = nwb.processing['behavior']['frame_aligned_position']['frame_aligned_forward_and_lateral_position'].data[:]
+forward_and_lateral_position_timestamps = nwb.processing['behavior']['frame_aligned_position']['frame_aligned_forward_and_lateral_position'].timestamps[:]
+deconvolved_activity_plane_0_data = nwb.processing['ophys']['deconvolved_activity_plane_0'].data[:]
+deconvolved_activity_plane_0_timestamps = nwb.processing['ophys']['deconvolved_activity_plane_0'].timestamps[:]
+deconvolved_activity_plane_1_data = nwb.processing['ophys']['deconvolved_activity_plane_1'].data[:]
+deconvolved_activity_plane_1_timestamps = nwb.processing['ophys']['deconvolved_activity_plane_1'].timestamps[:]
+deconvolved_activity_plane_2_data = nwb.processing['ophys']['deconvolved_activity_plane_2'].data[:]
+deconvolved_activity_plane_2_timestamps = nwb.processing['ophys']['deconvolved_activity_plane_2'].timestamps[:]
+deconvolved_activity_plane_3_data = nwb.processing['ophys']['deconvolved_activity_plane_3'].data[:]
+deconvolved_activity_plane_3_timestamps = nwb.processing['ophys']['deconvolved_activity_plane_3'].timestamps[:]
+
+# Create a function to rename DataFrame columns by appending a suffix
+def rename_columns(df, suffix):
+    return df.rename(columns=lambda x: f'{x}_{suffix}' if x != 'Timestamp' else x)
+
+# Load & prepare virmen position data
+position_data = forward_and_lateral_position_data
+position_timestamps = forward_and_lateral_position_timestamps
+position_df = pd.DataFrame(position_data, columns=['Forward Position', 'Lateral Position'])
+position_df['Timestamp'] = position_timestamps
+position_df.set_index('Timestamp', inplace=True)
+
+# Load and prepare neural activity data for each plane within file
+activity_planes = [deconvolved_activity_plane_0_data, deconvolved_activity_plane_1_data, 
+                   deconvolved_activity_plane_2_data, deconvolved_activity_plane_3_data]
+activity_timestamps = [deconvolved_activity_plane_0_timestamps, deconvolved_activity_plane_1_timestamps, 
+                       deconvolved_activity_plane_2_timestamps, deconvolved_activity_plane_3_timestamps]
